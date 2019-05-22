@@ -1,7 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
 // externals
-use juniper::{EmptyMutation, RootNode};
 use rocket::response::content;
 use rocket::State;
 
@@ -26,10 +25,7 @@ fn api(
 fn main() {
     rocket::ignite()
         .manage(schema::Context)
-        .manage(schema::Schema::new(
-            schema::Query,
-            EmptyMutation::<schema::Context>::new(),
-        ))
+        .manage(schema::create_schema())
         .mount("/", rocket::routes![playground, api])
         .launch();
 }

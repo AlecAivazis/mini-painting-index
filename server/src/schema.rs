@@ -17,5 +17,15 @@ impl Query {
 // the context type for queries
 pub struct Context;
 
+impl Context {
+    pub fn new() -> Context {
+        Context {}
+    }
+}
+
 // the root schema type
 pub type Schema = RootNode<'static, Query, EmptyMutation<Context>>;
+
+pub fn create_schema() -> Schema {
+    Schema::new(Query, EmptyMutation::<Context>::new())
+}

@@ -8,3 +8,17 @@ edition = "2018"
 juniper = "0.12.0"
 juniper_rocket = "0.3.0"
 rocket = "0.4.1"
+
+
+[raze]
+# for more info: https://github.com/google/cargo-raze
+workspace_path = "//server"
+target = "x86_64-unknown-linux-gnu"
+
+
+# enable vendoring for bazel
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "~/dv/mini-painting-index/server/vendor"

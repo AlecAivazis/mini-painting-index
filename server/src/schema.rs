@@ -7,7 +7,6 @@ pub struct Query;
     Context = Context,
 )]
 impl Query { 
-    
     /// the version of the platform
     fn apiVersion() -> &'static str {
         // grab the current cargo version with a macro

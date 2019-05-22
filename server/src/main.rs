@@ -6,7 +6,8 @@ use rocket::State;
 
 // local module declarations
 mod playground;
-mod schema;
+mod api;
+mod products;
 
 #[rocket::get("/")]
 fn playground() -> content::Html<&'static str> {
@@ -15,17 +16,19 @@ fn playground() -> content::Html<&'static str> {
 
 #[rocket::post("/", data = "<request>")]
 fn api(
-    context: State<schema::Context>,
     request: juniper_rocket::GraphQLRequest,
-    schema: State<schema::Schema>,
+    schema: State<api::Schema>,
 ) -> juniper_rocket::GraphQLResponse {
+    // we want to create a new collection of dataloaders on every request
+    let context = api::Context::new();
+
+    // resolve the request given the schema and current context
     request.execute(&schema, &context)
 }
 
 fn main() {
     rocket::ignite()
-        .manage(schema::Context)
-        .manage(schema::create_schema())
+        .manage(api::root_node())
         .mount("/", rocket::routes![playground, api])
         .launch();
 }

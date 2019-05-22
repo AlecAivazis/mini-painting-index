@@ -1,4 +1,3 @@
-
 pub const PLAYGROUND_CONTENT : &'static str = r##"
 <!DOCTYPE html>
 <html>

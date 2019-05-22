@@ -1,0 +1,10 @@
+[package]
+name = "paint-server"
+version = "0.1.0"
+authors = ["Alec Aivazis <alec@aivazis.com>"]
+edition = "2018"
+
+[dependencies]
+juniper = "0.12.0"
+juniper_rocket = "0.3.0"
+rocket = "0.4.1"
